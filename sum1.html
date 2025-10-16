@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script>
+            function createElement(conStrElementTypeName, conStrParentId = document.getElementById("form")) {
+                return conStrParentId.appendChild(document.createElement(conStrElementTypeName))
+            }
+
+            function computeSum() {
+                const conIntUnitlessWidthOfTextBox = 38
+                const conFrmForm = createElement("form", document.getElementById("body"))
+                conFrmForm.setAttribute("id", "form")
+                const conTxtFirstNumber = createElement("input")
+                const conTxtSecondNumber = createElement("input")
+                const conBtnOk = createElement("button")
+                conBtnOk.innerHTML = "OK"
+                conBtnOk.setAttribute("type", "button")
+                conBtnOk.addEventListener("click", function () {
+                    const conDblFirstNumber = parseFloat(conTxtFirstNumber.value) 
+                    const conDblSecondNumber = parseFloat(conTxtSecondNumber.value) 
+                    let outSum
+                    if (outSum == undefined) outSum = createElement("output")
+                    outSum.innerHTML = "Sum = " + (conDblFirstNumber + conDblSecondNumber)   
+                })          
+            }
+        </script>
+    </head>
+    <body id = "body" onload = "computeSum()"></body>
+</html>
