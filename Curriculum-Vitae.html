@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Curriculum Vitae</title>
+    <script>
+        // This function creates an element and adds it to a parent
+        function createElement(parentId, elementType, text) {
+            const element = document.createElement(elementType);
+            if (text) element.innerHTML = text;
+            document.getElementById(parentId).appendChild(element);
+            return element;
+        }
+
+        function createCurriculumVitae() {
+            // Create the main heading
+            createElement("body", "h2", "CURRICULUM VITAE");
+
+            // --- Personal Information Section ---
+            createElement("body", "h3", "Personal Information");
+            createElement("body", "p", "Name: Emmanuel John");
+            createElement("body", "p", "Reg No: 20/335");
+            createElement("body", "p", "Department: Computer Science");
+
+            // --- Educational Background Section ---
+            createElement("body", "h3", "Educational Background");
+
+            // Create a table
+            const table = createElement("body", "table");
+            table.style.border = "2px solid black";
+            table.style.borderCollapse = "collapse";
+            table.style.width = "60%";
+            table.style.textAlign = "center";
+
+            // Create table header row
+            const headerRow = document.createElement("tr");
+            const headers = ["S/N", "Institution", "Date", "Qualification"];
+            for (let h of headers) {
+                const th = document.createElement("th");
+                th.innerHTML = h;
+                th.style.border = "1px solid black";
+                headerRow.appendChild(th);
+            }
+            table.appendChild(headerRow);
+
+            // Educational data (without S/N — will be generated)
+            const eduData = [
+                ["Kadpoly", "2022", "HND"],
+                ["GDSS", "2020", "WECO"]
+            ];
+
+            // Loop to create rows and automatically generate S/N
+            for (let i = 0; i < eduData.length; i++) {
+                const row = document.createElement("tr");
+
+                // Automatically compute serial number
+                const snCell = document.createElement("td");
+                snCell.innerHTML = i + 1; // serial number (1 greater than loop index)
+                snCell.style.border = "1px solid black";
+                row.appendChild(snCell);
+
+                // Other cells from eduData
+                for (let j = 0; j < eduData[i].length; j++) {
+                    const cell = document.createElement("td");
+                    cell.innerHTML = eduData[i][j];
+                    cell.style.border = "1px solid black";
+                    row.appendChild(cell);
+                }
+
+                table.appendChild(row);
+            }
+
+            // --- Working Experience Section ---
+            createElement("body", "h3", "Working Experience");
+            createElement("body", "p", "None for now");
+        }
+    </script>
+</head>
+<body id="body" onload="createCurriculumVitae()">
+</body>
+</html>
