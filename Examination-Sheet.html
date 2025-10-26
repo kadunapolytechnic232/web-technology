@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Examination Sheet</title>
+    <script>
+        // Function to create and append an element
+        function createElement(parentId, elementType, text) {
+            const element = document.createElement(elementType);
+            if (text) element.innerHTML = text;
+            document.getElementById(parentId).appendChild(element);
+            return element;
+        }
+
+        function createExamSheet() {
+            // Create heading
+            createElement("body", "h2", "EXAMINATION RESULT SHEET");
+
+            // Create table
+            const table = createElement("body", "table");
+            table.style.border = "2px solid black";
+            table.style.borderCollapse = "collapse";
+            table.style.textAlign = "center";
+            table.style.width = "80%";
+            table.style.marginTop = "10px";
+
+            // Table headers
+            const headers = ["S/N", "Reg No", "Name", "Class Work", "100% Exam", "60% Exam", "Total"];
+            const headerRow = document.createElement("tr");
+            for (let h of headers) {
+                const th = document.createElement("th");
+                th.innerHTML = h;
+                th.style.border = "1px solid black";
+                th.style.padding = "5px";
+                headerRow.appendChild(th);
+            }
+            table.appendChild(headerRow);
+
+            // Student data (excluding computed fields)
+            const students = [
+                ["20/101", "Yahaya Abdullahi", 35, 80],
+                ["20/102", "Mubarak sabi'u", 28, 60],
+                ["20/103", "Abubakar Zakariyya", 30, 75]
+            ];
+
+            // Loop to create table rows and compute values
+            for (let i = 0; i < students.length; i++) {
+                const row = document.createElement("tr");
+
+                // Serial Number (generated automatically)
+                const snCell = document.createElement("td");
+                snCell.innerHTML = i + 1;
+                snCell.style.border = "1px solid black";
+                row.appendChild(snCell);
+
+                // Reg No, Name, Class Work, 100% Exam
+                for (let j = 0; j < students[i].length; j++) {
+                    const cell = document.createElement("td");
+                    cell.innerHTML = students[i][j];
+                    cell.style.border = "1px solid black";
+                    row.appendChild(cell);
+                }
+
+                // 60% of Exam
+                const sixtyPercentExam = 0.6 * students[i][3];
+                const sixtyCell = document.createElement("td");
+                sixtyCell.innerHTML = sixtyPercentExam.toFixed(1); // one decimal
+                sixtyCell.style.border = "1px solid black";
+                row.appendChild(sixtyCell);
+
+                // Total = Class Work + 60% Exam
+                const total = students[i][2] + sixtyPercentExam;
+                const totalCell = document.createElement("td");
+                totalCell.innerHTML = total.toFixed(1);
+                totalCell.style.border = "1px solid black";
+                row.appendChild(totalCell);
+
+                // Add the completed row to the table
+                table.appendChild(row);
+            }
+        }
+    </script>
+</head>
+<body id="body" onload="createExamSheet()"></body>
+</html>
