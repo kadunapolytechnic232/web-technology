@@ -1,30 +1,42 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <script>
-            function createElement(conStrElementTypeName, conStrParentId = document.getElementById("form")) {
-                return conStrParentId.appendChild(document.createElement(conStrElementTypeName))
-            }
+<head>
+  <meta charset="utf-8">
+  <title>Simple Sum (Dynamic)</title>
+  <script>
+    // Function to create a new element inside a parent
+    function createElement(type, parent = document.getElementById("form")) {
+      const el = document.createElement(type);   // create new element
+      parent.appendChild(el);                    // add it to the parent
+      return el;                                 // return the element
+    }
 
-            function computeSum() {
-                const conIntUnitlessWidthOfTextBox = 38
-                const conFrmForm = createElement("form", document.getElementById("body"))
-                conFrmForm.setAttribute("id", "form")
-                const conTxtFirstNumber = createElement("input")
-                const conTxtSecondNumber = createElement("input")
-                const conBtnOk = createElement("button")
-                conBtnOk.innerHTML = "OK"
-                conBtnOk.setAttribute("type", "button")
-                conBtnOk.addEventListener("click", function () {
-                    const conDblFirstNumber = parseFloat(conTxtFirstNumber.value) 
-                    const conDblSecondNumber = parseFloat(conTxtSecondNumber.value) 
-                    let outSum
-                    if (outSum == undefined) outSum = createElement("output")
-                    outSum.innerHTML = "Sum = " + (conDblFirstNumber + conDblSecondNumber)   
-                })          
-            }
-        </script>
-    </head>
-    <body id = "body" onload = "computeSum()"></body>
+    // Function that runs when the page loads
+    function computeSum() {
+      // create a form inside the body
+      const form = createElement("form", document.getElementById("body"));
+      form.id = "form";
 
+      // create two input boxes and a button
+      const first = createElement("input");
+      const second = createElement("input");
+      const button = createElement("button");
+      button.textContent = "OK";
+      button.type = "button";
+
+      // create an output area (empty for now)
+      const output = createElement("output");
+
+      // when button is clicked, calculate and show the sum
+      button.addEventListener("click", () => {
+        const num1 = parseFloat(first.value) || 0;
+        const num2 = parseFloat(second.value) || 0;
+        output.textContent = "Sum = " + (num1 + num2);
+      });
+    }
+  </script>
+</head>
+
+<!-- when the page loads, it calls computeSum() -->
+<body id="body" onload="computeSum()"></body>
 </html>
